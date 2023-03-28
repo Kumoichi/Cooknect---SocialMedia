@@ -144,5 +144,3 @@ function likeComment(commentId) {
     xhttp.send(query);
 } 
 </script>
-
-<!-- test pushing -->

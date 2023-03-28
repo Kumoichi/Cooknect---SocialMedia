@@ -28,8 +28,8 @@ if ($_POST['page'] == 'StartPage')
                 session_start();
                 $_SESSION['signed'] = 'YES';
                 $_SESSION['username'] = $_POST['username'];
-                $result = getContent();
-                $resultTwo = getContent();
+                $result = getContent($_SESSION['username']);
+                $resultTwo = getContent($_SESSION['username']);
                 include('mainpage.php');
             }
             exit();
@@ -162,8 +162,8 @@ else if ($_POST['page'] == 'PostingPage')
             $statusMsg = 'Please select an image file to upload.'; 
         } 
 
-        $result = getContent();
-        $resultTwo = getContent();
+        $result = getContent($_SESSION['username']);
+        $resultTwo = getContent($_SESSION['username']);
             include("mainpage.php");
             exit();
         break;

@@ -93,12 +93,13 @@ function insertContent($username, $comment, $imageContent) {
 }
 
 //selecting id, image, comment, like. Storing them in descending order
-function getContent(){
+function getContent($username){
     global $conn;
-    $sql = "SELECT id, image, comment, `like` FROM images ORDER BY id DESC"; 
+    $sql = "SELECT id, image, comment, `like` FROM images WHERE username='$username' ORDER BY id DESC"; 
     $result = mysqli_query($conn,$sql);
     return $result;
 }
+
 
 //getting number of like
 function getLikes($commentId) {
