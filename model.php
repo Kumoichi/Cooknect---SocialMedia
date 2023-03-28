@@ -59,16 +59,21 @@ function user_data($username){
 }
 
 //updating username, email, description.
-function edited_data($pusername, $username,$email,$description)
+function edited_data($pusername, $username, $email, $description)
 {
     global $conn;
-    $sql = "UPDATE userstable
-    SET Username = '$username', Email = '$email', Description = '$description' 
-    WHERE  Username = '$pusername';";
-    $result = mysqli_query($conn, $sql);
-   
-    return $result;
+    $sql1 = "UPDATE userstable
+             SET Username = '$username', Email = '$email', Description = '$description' 
+             WHERE Username = '$pusername'";
+    $result1 = mysqli_query($conn, $sql1);
+    
+    // Update the username column in the images table
+    $sql2 = "UPDATE images SET username = '$username' WHERE username = '$pusername'";
+    $result2 = mysqli_query($conn, $sql2);
+    
+    return ($result1 && $result2);
 }
+
 
 
 function insertContent($username, $comment, $imageContent) {
