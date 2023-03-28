@@ -70,6 +70,7 @@
 <!-- this is for posting popular posts. -->
 <div class="right-div p-4 mb-3 bg-light border rounded" style="position: fixed; width:30%; right: 0px;">
     <h4 class="text-center">Top 3 Popular Post</h4>
+    <!-- making it scrollable -->
     <div class="containImage" style="max-height: 400px; overflow-y: auto;"> 
         <?php while($row = mysqli_fetch_assoc($resultTwo)){ ?> 
             <div class="card mb-3">
@@ -82,7 +83,6 @@
             </div>
         <?php } ?>
     </div>
-    <div class="secondComment" style="height:100%;width:70%;  position:absolute; display:inline;"></div>
 </div>
 
 
