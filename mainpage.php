@@ -69,33 +69,23 @@
 
 <!-- this is for posting popular posts. -->
 <div class="right-div p-4 mb-3 bg-light border rounded" style="position: fixed; width:30%; right: 0px;">
-    <h4 class="text-center">Popular Post</h4>
-
-    
-    <?php
-    
-    if(mysqli_num_rows($resultTwo) > 0){ ?> 
-        <div class="containImage"> 
-            <?php while($row = mysqli_fetch_assoc($resultTwo)){ ?> 
-                <div class="card mb-3">
-                    <div style="height:400px">
-                        <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style="max-height: 100%; max-width: 100%;" />
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"><?php echo $row['comment']; ?></p>
-                    </div>
+    <h4 class="text-center">Top 3 Popular Post</h4>
+    <div class="containImage" style="max-height: 400px; overflow-y: auto;"> 
+        <?php while($row = mysqli_fetch_assoc($resultTwo)){ ?> 
+            <div class="card mb-3">
+                <div style="height:400px">
+                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style="max-height: 100%; max-width: 100%;" />
                 </div>
-            <?php } ?>
-        </div>
-    <?php } ?>
-
-
-
-
-    <div class="secondComment" style="height:100%;width:70%;  position:absolute; display:inline;">   
+                <div class="card-body">
+                    <p class="card-text"><?php echo $row['comment']; ?></p>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <div class="secondComment" style="height:100%;width:70%;  position:absolute; display:inline;"></div>
 </div>
-</div>
-</div>
+
+
 
 
 <!-- display the user description-->

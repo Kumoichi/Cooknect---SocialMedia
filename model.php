@@ -100,7 +100,7 @@ function insertContent($username, $comment, $imageContent) {
 //selecting id, image, comment, like. Storing them in descending order
 function getContent($username){
     global $conn;
-    $sql = "SELECT id, image, comment, `like` FROM images WHERE username='$username' ORDER BY id DESC"; 
+    $sql = "SELECT id, image, comment, 'like' FROM images WHERE username='$username' ORDER BY id DESC"; 
     $result = mysqli_query($conn,$sql);
     return $result;
 }
@@ -110,7 +110,7 @@ function getContent($username){
 function getLikes($commentId) {
     global $conn;
     
-    $sql = "SELECT `like` FROM `images` WHERE `id` = $commentId";
+    $sql = "SELECT 'like' FROM 'images' WHERE 'id' = $commentId";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
@@ -129,7 +129,7 @@ function getLikes($commentId) {
 //updating number of like
 function updateLikes($commentId, $likes) {
     global $conn;
-    $query = "UPDATE images SET `like` = '$likes' WHERE id = '$commentId'";
+    $query = "UPDATE images SET 'like' = '$likes' WHERE id = '$commentId'";
     if(mysqli_query($conn, $query)) {
         return true;
     } else {
@@ -140,7 +140,7 @@ function updateLikes($commentId, $likes) {
 
 function getRankedImage($username){
     global $conn;
-    $sql = "SELECT id, image, comment, `like` FROM images WHERE username = '$username' ORDER BY `like` DESC"; 
+    $sql = "SELECT id, image, comment, 'like' FROM images WHERE username = '$username' ORDER BY 'like' DESC"; 
     $result = mysqli_query($conn,$sql);
     return $result;
 }
