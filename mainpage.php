@@ -142,9 +142,7 @@ function likeComment(commentId) {
     query += "&command=LikeComment";
     query += "&comment_id=" + commentId;
     xhttp.send(query);
-}
+} 
 </script>
 
-
-<!--  need to post images on the popular post div -->
-<!-- when I change the username I need to update image table 'username' column too -->
+<!-- test pushing -->
