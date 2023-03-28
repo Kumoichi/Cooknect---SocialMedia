@@ -137,17 +137,25 @@ else if ($_POST['page'] == 'PostingPage')
         if(!empty($_FILES["image"]["name"])) { 
             // Get file info 
            
+            //The basename() function is a built-in function in PHP. 
+            //It is used to extract the filename from a path. 
             $fileName = basename($_FILES["image"]["name"]); 
+            //pathinfo buit-in function, the file extension of the uploaded file is then extracted
             $fileType = pathinfo($fileName, PATHINFO_EXTENSION); 
             
             // Allow certain file formats 
             $allowTypes = array('jpg','png','jpeg','gif'); 
+            //checks whether extention is allowed type
             if(in_array($fileType, $allowTypes)){ 
                 $image = $_FILES['image']['tmp_name']; 
+                //file_get_contents function is used to read the contents of the uploaded image file
+                // and store them in the $imgContent variable as a string.
+                //addslashes adds backslash in case file name include like quote characters, 
+                //so it recgnizes image file correctly that prevent potential problem in database
                 $imgContent = addslashes(file_get_contents($image)); 
                 $comment = $_POST['comment'];
                 $username = $_SESSION['username'];
-                $insert = insertContent($username, $comment, $imgContent);
+                $insert = insertContent($username, $comment, $imgContent);//just inserting $username, $comment, $imgContent
                 
                 if($insert){ 
                     $status = 'success'; 
@@ -162,7 +170,9 @@ else if ($_POST['page'] == 'PostingPage')
             $statusMsg = 'Please select an image file to upload.'; 
         } 
 
+        //getting id, image, comment, like.
         $result = getContent($_SESSION['username']);
+        //getting id, image, comment, 'like'. In order of number of 'like'.
         $resultTwo = getRankedImage($_SESSION['username']);
             include("mainpage.php");
             exit();
