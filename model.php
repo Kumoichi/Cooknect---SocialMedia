@@ -66,7 +66,7 @@ function edited_data($pusername, $username, $email, $description)
              SET Username = '$username', Email = '$email', Description = '$description' 
              WHERE Username = '$pusername'";
     $result1 = mysqli_query($conn, $sql1);
-    
+
     // Update the username column in the images table
     $sql2 = "UPDATE images SET username = '$username' WHERE username = '$pusername'";
     $result2 = mysqli_query($conn, $sql2);
@@ -136,6 +136,15 @@ function updateLikes($commentId, $likes) {
         return false;
     }
 }
+
+
+function getRankedImage($username){
+    global $conn;
+    $sql = "SELECT id, image, comment, `like` FROM images WHERE username = '$username' ORDER BY `like` DESC"; 
+    $result = mysqli_query($conn,$sql);
+    return $result;
+}
+
 
 
 ?>   

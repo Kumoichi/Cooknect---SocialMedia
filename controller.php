@@ -29,7 +29,7 @@ if ($_POST['page'] == 'StartPage')
                 $_SESSION['signed'] = 'YES';
                 $_SESSION['username'] = $_POST['username'];
                 $result = getContent($_SESSION['username']);
-                $resultTwo = getContent($_SESSION['username']);
+                $resultTwo = getRankedImage($_SESSION['username']);
                 include('mainpage.php');
             }
             exit();
@@ -163,7 +163,7 @@ else if ($_POST['page'] == 'PostingPage')
         } 
 
         $result = getContent($_SESSION['username']);
-        $resultTwo = getContent($_SESSION['username']);
+        $resultTwo = getRankedImage($_SESSION['username']);
             include("mainpage.php");
             exit();
         break;
