@@ -146,19 +146,31 @@ function getRankedImage($username){
 }
 
 
+function deletePost($id)
+{
+    global $conn;
+    $sql = "DELETE FROM images WHERE id = '$id'";
+    if(mysqli_query($conn, $sql)) {
+        return true;
+    } else {
+        return false;
+    }
+
+}
+
 
 ?>   
 
 
 <!-- essential features -->
-<!-- change controller, viewTest and Nav page, because navpage is somehow requesting as MainPage -->
-<!-- Delete Post -->
 <!-- search friend -->
 <!-- use Jason for something, I don't know where to use honestly, I need to study, it will take 5 hours approximately -->
 <!-- use AJAX for finding friends -->
 <!-- you can use AJAX for viewing friends page too. once you press the button besides friends name then it shows thier page without loading. -->
 <!-- add session in each page -->
 <!-- when you press Cooknect, it jumps to the mainpage. -->
+<!-- sql and query bunbetsu suru -->
+
 
 <!-- desireable features -->
 <!-- put the description inside the description box on the mainpage -->

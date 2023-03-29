@@ -4,7 +4,6 @@
     include('startpage.php');
     exit();
    }
-
 ?>
 
 <!DOCTYPE html> 
@@ -76,6 +75,7 @@
             <div class="card mb-3">
                 <div style="height:400px">
                     <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style="max-height: 100%; max-width: 100%;" />
+                    
                 </div>
                 <div class="card-body">
                     <p class="card-text"><?php echo $row['comment']; ?></p>
@@ -111,46 +111,81 @@
                                         <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style="max-height: 100%; max-width: 100%;" />
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-text"><?php echo $row['comment']; ?></p>
+                                        <p class="card-text"style="border-top:#DCDCDC 1px solid"><?php echo $row['comment']; ?></p>
+                                        <button onclick="deletePost(<?php echo $row['id']; ?>)" data-post-id="<?php echo $row['id']; ?>">Delete Post</button>
                                         <!-- calling likeComment function for increment like value when users press like button -->
                                         <button onclick="likeComment(<?php echo $row['id']; ?>)" class="btn btn-outline-success">Like</button>
                                         <span style="display:block;" id="likes_<?php echo $row['id']; ?>" class="card-text"><?php echo $row['like']; ?></span>
                                     </div>
                                 </div>
-                                <?php } ?>
+                            <?php } ?>
                         </div>
-                    <?php }else{ ?>
-                        <p class="status error">Image(s) not found...</p> 
-                    <?php }
+                    <?php } 
                 }
             ?>
     </div>
-
-
-
-
-           
+     
         
 </body>
 </html>
 
 <script>
+$(document).ready(function() {
+    $('.delete-post').click(function() {
+        // Get the ID of the post to delete
+        var postId = $(this).attr('data-post-id');
+
+        // Send an AJAX request to delete the post
+        $.ajax({
+            url: 'delete-post.php',
+            type: 'POST',
+            data: {post_id: postId},
+            success: function(response) {
+                // Remove the deleted post from the screen
+                if (response === 'success') {
+                    $('[data-post-id=' + postId + ']').closest('.card').remove();
+                }
+            }
+        });
+    });
+});
+
+
+function deletePost(postId) {
+    // AJAX request to delete the post
+    $.ajax({
+        url: 'controller.php',
+        type: 'POST',
+        data: {
+            page: 'MainPage',
+            command: 'DeletePost',
+            post_id: postId
+        },
+        success: function(response) {
+            // Remove the deleted post from the screen
+            if (response === 'success') {
+                $('[data-post-id=' + postId + ']').closest('.card').remove();
+            }
+        }
+    });
+}
+
+
 
 function likeComment(commentId) {
-    // Make an AJAX call to update the 'like' column in the database
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+    // AJAX to update the 'like' column in the database
+    $.ajax({
+        url: 'controller.php',
+        type: 'POST',
+        data: {
+            page: 'MainPage',
+            command: 'LikeComment',
+            comment_id: commentId
+        },
+        success: function(response) {
             // Update the 'like' count in the HTML
-            document.getElementById('likes_' + commentId).innerHTML = this.responseText;
+            $('#likes_' + commentId).html(response);
         }
-    };
-    xhttp.open('POST', 'controller.php', true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    var query = "";
-    query += "page=ViewTest";
-    query += "&command=LikeComment";
-    query += "&comment_id=" + commentId;
-    xhttp.send(query);
-} 
+    });
+}
 </script>

@@ -66,15 +66,31 @@ else if ($_POST['page'] == 'MainPage')
 {
     session_start();
     $command = $_POST['command'];
-    switch($command) {  
-        case 'LogOut':
-            session_reset();
-            session_destroy();//reseting and destroying session when user is logging out.
-            $display_modal_window = 'none';//modal window for sign up and log in won't be shown
-            include('startpage.php');
+    switch($command) {          
+        case 'LikeComment':
+            $commentId = $_POST['comment_id'];
+            $likes = getLikes($commentId); //getting number of likes
+
+            if ($likes !== false) {
+                $likes++;
+                if (updateLikes($commentId, $likes)) {//update incremented like number
+                    echo $likes;
+                } else {
+                    echo 'Error: Failed to update likes';
+                }
+            } else {
+                echo 'Error: Comment not found';
+            }
+
             exit();
             break;
-            
+        case 'DeletePost':
+            $id = $_POST['post_id'];
+            deletePost($id);
+            echo 'success';
+            exit();
+            break;
+        
         default:
             echo "Unknown command from MainPage<br>";
             exit();
@@ -91,6 +107,14 @@ else if ($_POST['page'] == 'NavPage')
         case 'ShowProfile':
             $result = user_data($_SESSION['username']);//getting username, email, description
             include('profile.php');
+            exit();
+            break;
+        
+        case 'LogOut':
+            session_reset();
+            session_destroy();//reseting and destroying session when user is logging out.
+            $display_modal_window = 'none';//modal window for sign up and log in won't be shown
+            include('startpage.php');
             exit();
             break;
             
@@ -124,7 +148,6 @@ else if ($_POST['page'] == 'ProfilePage')
     }
 }
 
-
 else if ($_POST['page'] == 'PostingPage')
 {
     $status = $statusMsg = ''; 
@@ -156,7 +179,7 @@ else if ($_POST['page'] == 'PostingPage')
                 $comment = $_POST['comment'];
                 $username = $_SESSION['username'];
                 $insert = insertContent($username, $comment, $imgContent);//just inserting $username, $comment, $imgContent
-                
+                //一つのアイディアとしてインサートとゲットコンテントを分ければあ
                 if($insert){ 
                     $status = 'success'; 
                     $statusMsg = "File uploaded successfully."; 
@@ -174,38 +197,15 @@ else if ($_POST['page'] == 'PostingPage')
         $result = getContent($_SESSION['username']);
         //getting id, image, comment, 'like'. In order of number of 'like'.
         $resultTwo = getRankedImage($_SESSION['username']);
-            include("mainpage.php");
-            exit();
+
+        // unset the POST variables to prevent data from being resubmitted on refresh
+        
+        include("mainpage.php");
+        exit();
         break;
     }
 }
 
-
-else if ($_POST['page'] == 'ViewTest') {
-    $command = $_POST['command'];
-    switch ($command) {
-        case 'LikeComment':
-            $commentId = $_POST['comment_id'];
-            $likes = getLikes($commentId); //getting number of likes
-
-            if ($likes !== false) {
-                $likes++;
-                if (updateLikes($commentId, $likes)) {//update incremented like number
-                    echo $likes;
-                } else {
-                    echo 'Error: Failed to update likes';
-                }
-            } else {
-                echo 'Error: Comment not found';
-            }
-
-            exit();
-            break;
-        default:
-            echo 'Error: Invalid command';
-            break;
-    }
-}
 
 //Wrong
 else {

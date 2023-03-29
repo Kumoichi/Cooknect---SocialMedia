@@ -68,7 +68,7 @@
 
 <!-- this is the logout request form. -->
   <form id='form-logout' method='post' action='controller.php' style='display:none'>
-    <input type='hidden' name='page' value='MainPage'>
+    <input type='hidden' name='page' value='NavPage'>
     <input type='hidden' name='command' value='LogOut'>
     <input type='submit'>
   </form>
