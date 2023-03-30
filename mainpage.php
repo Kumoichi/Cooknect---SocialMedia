@@ -67,7 +67,7 @@
 <?php include 'navbar.php'; ?>
 
 <!-- this is for posting popular posts. -->
-<div class="right-div p-4 mb-3 bg-light border rounded" style="position: fixed; width:30%; right: 0px;">
+<div class="right-div p-4 mb-3 bg-light border rounded" style="background: black; position: fixed; width:30%; right: 0px;">
     <h4 class="text-center">Top 3 Popular Post</h4>
     <!-- making it scrollable -->
     <div class="containImage" style="max-height: 400px; overflow-y: auto;"> 
@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text"style="border-top:#DCDCDC 1px solid"><?php echo $row['comment']; ?></p>
-                                        <button onclick="deletePost(<?php echo $row['id']; ?>)" data-post-id="<?php echo $row['id']; ?>">Delete Post</button>
+                                        <button id="test" class="btn btn-outline-danger" onclick="deletePost(<?php echo $row['id']; ?>)" data-post-id="<?php echo $row['id']; ?>">Delete Post</button>
                                         <!-- calling likeComment function for increment like value when users press like button -->
                                         <button onclick="likeComment(<?php echo $row['id']; ?>)" class="btn btn-outline-success">Like</button>
                                         <span style="display:block;" id="likes_<?php echo $row['id']; ?>" class="card-text"><?php echo $row['like']; ?></span>
