@@ -95,7 +95,7 @@
 
     <!-- go to posting.php when you press + Post -->
     <div class="text-center" style="height:100%;width:70%; position:absolute; display:inline;">
-            <a href="posting.php" class="btn btn-outline-dark" style="margin:10px;">+  Post</a>
+            <a id="postButton" href="posting.php" class="btn btn-outline-dark" style="margin:10px;">+  Post</a>
                 <?php
                 
                 if(!isset($result)) {
@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text"style="border-top:#DCDCDC 1px solid"><?php echo $row['comment']; ?></p>
-                                        <button id="test" class="btn btn-outline-danger" onclick="deletePost(<?php echo $row['id']; ?>)" data-post-id="<?php echo $row['id']; ?>">Delete Post</button>
+                                        <button id="deleteButton" class="btn btn-outline-danger" onclick="deletePost(<?php echo $row['id']; ?>)" data-post-id="<?php echo $row['id']; ?>">Delete Post</button>
                                         <!-- calling likeComment function for increment like value when users press like button -->
                                         <button onclick="likeComment(<?php echo $row['id']; ?>)" class="btn btn-outline-success">Like</button>
                                         <span style="display:block;" id="likes_<?php echo $row['id']; ?>" class="card-text"><?php echo $row['like']; ?></span>
