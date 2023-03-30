@@ -147,6 +147,20 @@ else if ($_POST['page'] == 'ProfilePage')
             include('profile.php');
             exit();
             break;
+        
+        case 'Unsubscribe':
+            $status = '';
+            $username = $_SESSION['username'];
+            $result = deleteUser($username);
+            if($result)
+            {
+                $status = 'successfully unsubscribed';
+            } else {
+                $status = 'failed';
+            }
+            $display_modal_window = 'backtostart';
+            include('startpage.php');
+            exit();
             
         default:
             echo "Unknown command from MainPage<br>";
@@ -212,6 +226,38 @@ else if ($_POST['page'] == 'PostingPage')
         break;
     }
 }
+
+
+if ($_POST['page'] == 'SearchFriend')
+{
+    $command = $_POST['command'];
+    switch($command) {  
+        case 'GetFriend': 
+        // get the search term from the request
+        $searchTerm = isset($_POST['searchTerm']) ? $_POST['searchTerm'] : '';
+
+        $result = getFriend($searchTerm);
+        
+        $rows = array();
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $rows[] = $row;
+            }
+        }
+        echo json_encode($rows);
+        // close the database connection
+        mysqli_close($conn);
+        exit();
+        break;
+        
+    default:
+        echo "Unknown command from StartPage<br>";
+        exit();
+        break;
+    }
+}
+
+
 
 
 //Wrong
