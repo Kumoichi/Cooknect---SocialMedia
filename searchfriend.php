@@ -65,7 +65,7 @@
         $('[data-username]').click(function() {
         var username = $(this).data('username');
         // create and submit the form with the username value
-        var form = $('<form action="deleteuser.php" method="post">' +
+        var form = $('<form action="controller.php" method="post">' +
                         '<input type="hidden" name="username" value="' + username + '">' +
                         '<input type="hidden" name="page" value="SearchFriend">' +
                         '<input type="hidden" name="command" value="FriendPost">' +
