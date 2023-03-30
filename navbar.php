@@ -45,7 +45,7 @@
   <!-- this is the navigation at the top -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" id='load-mainpage'href="#">Cooknect</a>
+      <a class="navbar-brand" id='load-mainpage'>Cooknect</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,10 +56,10 @@
           </li>
          
           <li class="nav-item">
-            <a class="nav-link" href="#">Search Friend</a>
+            <a class="nav-link" href="searchfriend.php">Search Friend</a>
           </li>
           <li class="nav-item">
-            <a id="nav-logout" class="nav-link" href="#">Log out</a>
+            <a id="nav-logout" class="nav-link">Log out</a>
           </li>
         </ul>
       </div>
