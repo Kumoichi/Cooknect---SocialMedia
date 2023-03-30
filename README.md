@@ -1,2 +1,3 @@
 # SocialMedia-Website
-#still working on it
+#all features are done
+#in the process of modifying design
