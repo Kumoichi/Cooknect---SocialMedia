@@ -117,7 +117,14 @@ else if ($_POST['page'] == 'NavPage')
             include('startpage.php');
             exit();
             break;
-            
+        
+        case 'GoMain':
+            $result = getContent($_SESSION['username']);
+                $resultTwo = getRankedImage($_SESSION['username']);
+                include('mainpage.php');
+                exit();
+                break;
+
         default:
             echo "Unknown command from MainPage<br>";
             exit();

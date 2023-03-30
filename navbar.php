@@ -45,7 +45,7 @@
   <!-- this is the navigation at the top -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Cooknect</a>
+      <a class="navbar-brand" id='load-mainpage'href="#">Cooknect</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -66,6 +66,13 @@
     </div>
   </nav>
 
+  <form id='form-mainpage' method='post' action='controller.php' style='display:none'>
+    <input type='hidden' name='page' value='NavPage'>
+    <input type='hidden' name='command' value='GoMain'>
+    <input type='submit'>
+  </form>
+
+
 <!-- this is the logout request form. -->
   <form id='form-logout' method='post' action='controller.php' style='display:none'>
     <input type='hidden' name='page' value='NavPage'>
@@ -82,6 +89,10 @@
 </body>
 
 <script>
+
+  document.getElementById('load-mainpage').addEventListener('click',function() {
+    document.getElementById('form-mainpage').submit();
+  })
 //for when you press logout from nav.
     document.getElementById('nav-logout').addEventListener('click', function() {
         document.getElementById('form-logout').submit();
