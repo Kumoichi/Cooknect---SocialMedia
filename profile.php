@@ -42,25 +42,31 @@
   <input type='hidden' name='command' value='EditProfile'>
 </form>
 
-<button type="button" id="Editing" class="btn btn-outline-info">Edit Profile</button>
-<button type="button" class="btn btn-outline-info">Log Out</button>
-<button type="button" class="btn btn-outline-info">Unsubscribe</button>
+  <form id='form-unsubscribe' method='post' action='controller.php' style='display:none'>
+      <input type='hidden' name='page' value='ProfilePage'>
+      <input type='hidden' name='command' value='Unsubscribe'>
+      <input type='submit'>
+  </form>
 
+  <button type="button" id="Editing" class="btn btn-outline-info">Edit Profile</button>
+  <button type="button" class="btn btn-outline-info">Log Out</button>
+  <button type="button" id='Unsubscribe' class="btn btn-outline-info">Unsubscribe</button>
 
 </div>
-
-
 
 </body>
 </html>
 
 
 <script>
+  document.getElementById('Unsubscribe').addEventListener('click', function() {
+        document.getElementById('form-unsubscribe').submit();
+    });
+
   //username, email, description are sent when Editing button is clicked. 
   document.getElementById('Editing').addEventListener('click', function() {
         document.getElementById('edit-profile-form').submit();
     });
-
 </script>
 
 
