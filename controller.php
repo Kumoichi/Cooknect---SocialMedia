@@ -233,22 +233,31 @@ if ($_POST['page'] == 'SearchFriend')
     $command = $_POST['command'];
     switch($command) {  
         case 'GetFriend': 
-        // get the search term from the request
-        $searchTerm = isset($_POST['searchTerm']) ? $_POST['searchTerm'] : '';
+            // get the search term from the request
+            $searchTerm = isset($_POST['searchTerm']) ? $_POST['searchTerm'] : '';
 
-        $result = getFriend($searchTerm);
-        
-        $rows = array();
-        if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_assoc($result)) {
-                $rows[] = $row;
+            $result = getFriend($searchTerm);
+            
+            $rows = array();
+            if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                    $rows[] = $row;
+                }
             }
-        }
-        echo json_encode($rows);
-        // close the database connection
-        mysqli_close($conn);
-        exit();
-        break;
+            echo json_encode($rows);
+            // close the database connection
+            mysqli_close($conn);
+            exit();
+            break;
+
+        case 'FriendPost':
+            session_start();
+            $username = $_POST['username'];
+            $result = getContent($username);
+            $resultTwo = getRankedImage($username);
+            include('friendpage.php');
+            exit();
+            break;
         
     default:
         echo "Unknown command from StartPage<br>";
