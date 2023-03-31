@@ -57,6 +57,12 @@
             background-color: LightGray;
             cursor: pointer;
         }
+
+        .delete-button {
+            position: absolute;
+            left: 10%; 
+            top: 50%; 
+        }
         
     </style>
 </head>
@@ -115,10 +121,9 @@
                                     <div style="height:400px">
                                         <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style="max-height: 100%; max-width: 100%;" />
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body" style="position: relative">
                                         <p class="card-text"style="border-top:#DCDCDC 1px solid"><?php echo $row['comment']; ?></p>
-                                        <button id="deleteButton" class="btn btn-outline-danger" onclick="deletePost(<?php echo $row['id']; ?>)" data-post-id="<?php echo $row['id']; ?>">Delete Post</button>
-
+                                        <button id="deleteButton" class="btn btn-outline-danger delete-button" onclick="deletePost(<?php echo $row['id']; ?>)" data-post-id="<?php echo $row['id']; ?>">Delete Post</button>
                                         <form id="deleteForm_<?php echo $row['id']; ?>" method="post" action="controller.php">
                                             <input type="hidden" name="page" value="MainPage">
                                             <input type='hidden' name='command' value="DeletePost">
