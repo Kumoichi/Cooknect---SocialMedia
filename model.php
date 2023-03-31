@@ -1,6 +1,5 @@
 <?php
 
-   
 $conn = mysqli_connect('localhost', 'root', '', 'test');    
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -128,8 +127,8 @@ function getLikes($commentId) {
 //updating number of like
 function updateLikes($commentId, $likes) {
     global $conn;
-    $query = "UPDATE images SET `like` = '$likes' WHERE id = '$commentId'";
-    if(mysqli_query($conn, $query)) {
+    $sql = "UPDATE images SET `like` = '$likes' WHERE id = '$commentId'";
+    if(mysqli_query($conn, $sql)) {
         return true;
     } else {
         return false;
@@ -159,8 +158,8 @@ function deleteUser($username)
     $sql = "DELETE FROM images WHERE username = '$username'";
     mysqli_query($conn, $sql);
     if (mysqli_affected_rows($conn) > 0) {
-        $query = "DELETE FROM userstable WHERE Username = '$username'";
-        mysqli_query($conn, $query);
+        $sql = "DELETE FROM userstable WHERE Username = '$username'";
+        mysqli_query($conn, $sql);
         if (mysqli_affected_rows($conn) > 0) {
             return true;
         }
