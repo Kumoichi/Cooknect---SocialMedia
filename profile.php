@@ -1,10 +1,9 @@
 <?php
-   if (!isset($_SESSION['signed'])) {
+   if (!isset($_SESSION['signed']) || $_SESSION['signed'] != 'YES') {
     $display_modal_window = 'backtostart'; 
     include('startpage.php');
     exit();
    }
-
 ?>
 
 <!DOCTYPE html>

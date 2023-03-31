@@ -1,3 +1,12 @@
+<?php
+   if (!isset($_SESSION['signed']) || $_SESSION['signed'] != 'YES') {
+    $display_modal_window = 'backtostart'; 
+    include('startpage.php');
+    exit();
+   }
+?>
+
+
 <!-- sending form of image and comment -->
 
 <form action="controller.php" method="post" enctype="multipart/form-data">

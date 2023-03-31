@@ -1,3 +1,11 @@
+<?php
+   if (!isset($_SESSION['signed']) || $_SESSION['signed'] != 'YES') {
+    $display_modal_window = 'backtostart'; 
+    include('startpage.php');
+    exit();
+   }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +64,12 @@
           </li>
          
           <li class="nav-item">
-            <a class="nav-link" href="searchfriend.php">Search Friend</a>
+            <a id="navsearch" class="nav-link">Search Friend</a>
+            <form id='form-navsearch' method='post' action='controller.php' style='display:none'>
+                    <input type='hidden' name='page' value='NavPage'>
+                    <input type='hidden' name='command' value='NavSearch'>
+                    <input type='submit' value='Submit'>
+                </form>
           </li>
           <li class="nav-item">
             <a id="nav-logout" class="nav-link">Log out</a>
@@ -89,6 +102,9 @@
 </body>
 
 <script>
+  document.getElementById('navsearch').addEventListener('click',function() {
+        document.getElementById('form-navsearch').submit();
+    });
 
   document.getElementById('load-mainpage').addEventListener('click',function() {
     document.getElementById('form-mainpage').submit();
