@@ -95,7 +95,12 @@
 
     <!-- go to posting.php when you press + Post -->
     <div class="text-center" style="height:100%;width:70%; position:absolute; display:inline;">
-            <a id="postButton" href="posting.php" class="btn btn-outline-dark" style="margin:10px;">+  Post</a>
+                    <a id="postButton" class="btn btn-outline-dark" style="margin:10px;">+ Post</a>
+                <form id='form-postImage' method='post' action='controller.php' style='display:none'>
+                    <input type='hidden' name='page' value='MainPage'>
+                    <input type='hidden' name='command' value='PostImage'>
+                    <input type='submit' value='Submit'>
+                </form>
                 <?php
                 
                 if(!isset($result)) {
@@ -135,6 +140,10 @@
 
 
 <script>
+    document.getElementById('postButton').addEventListener('click',function() {
+        document.getElementById('form-postImage').submit();
+    });
+
 function deletePost(postId) {
     var form = document.getElementById('deleteForm_' + postId);
     form.submit();
