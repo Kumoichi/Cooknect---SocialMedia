@@ -113,6 +113,12 @@
                                     <div class="card-body">
                                         <p class="card-text"style="border-top:#DCDCDC 1px solid"><?php echo $row['comment']; ?></p>
                                         <button id="deleteButton" class="btn btn-outline-danger" onclick="deletePost(<?php echo $row['id']; ?>)" data-post-id="<?php echo $row['id']; ?>">Delete Post</button>
+
+                                        <form id="deleteForm_<?php echo $row['id']; ?>" method="post" action="controller.php">
+                                            <input type="hidden" name="page" value="MainPage">
+                                            <input type='hidden' name='command' value="DeletePost">
+                                            <input type="hidden" name="postId" value="<?php echo $row['id']; ?>">
+                                        </form>
                                         <!-- calling likeComment function for increment like value when users press like button -->
                                         <button onclick="likeComment(<?php echo $row['id']; ?>)" class="btn btn-outline-success">Like</button>
                                         <span style="display:block;" id="likes_<?php echo $row['id']; ?>" class="card-text"><?php echo $row['like']; ?></span>
@@ -124,53 +130,15 @@
                 }
             ?>
     </div>
-     
-        
 </body>
 </html>
 
+
 <script>
-$(document).ready(function() {
-    $('.delete-post').click(function() {
-        // Get the ID of the post to delete
-        var postId = $(this).attr('data-post-id');
-
-        // Send an AJAX request to delete the post
-        $.ajax({
-            url: 'delete-post.php',
-            type: 'POST',
-            data: {post_id: postId},
-            success: function(response) {
-                // Remove the deleted post from the screen
-                if (response === 'success') {
-                    $('[data-post-id=' + postId + ']').closest('.card').remove();
-                }
-            }
-        });
-    });
-});
-
-
 function deletePost(postId) {
-    // AJAX request to delete the post
-    $.ajax({
-        url: 'controller.php',
-        type: 'POST',
-        data: {
-            page: 'MainPage',
-            command: 'DeletePost',
-            post_id: postId
-        },
-        success: function(response) {
-            // Remove the deleted post from the screen
-            if (response === 'success') {
-                $('[data-post-id=' + postId + ']').closest('.card').remove();
-            }
-        }
-    });
+    var form = document.getElementById('deleteForm_' + postId);
+    form.submit();
 }
-
-
 
 function likeComment(commentId) {
     // AJAX to update the 'like' column in the database
