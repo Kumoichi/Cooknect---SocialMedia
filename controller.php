@@ -16,7 +16,7 @@ require_once('model.php');  // This file includes some routines to use DB.
 if ($_POST['page'] == 'StartPage')
 {
     $command = $_POST['command'];
-    switch($command) {  
+    switch($command) {
         case 'LogIn':   //With username, password
             if (!username_password_valid($_POST['username'], $_POST['password'])) {
                 $display_modal_window = 'login';  // It will display the start page with the LogIn box.
@@ -85,9 +85,11 @@ else if ($_POST['page'] == 'MainPage')
             exit();
             break;
         case 'DeletePost':
-            $id = $_POST['post_id'];
+            $id = $_POST['postId'];
             deletePost($id);
-            echo 'success';
+            $result = getContent($_SESSION['username']);
+            $resultTwo = getRankedImage($_SESSION['username']);
+            include("mainpage.php");
             exit();
             break;
         
@@ -200,7 +202,6 @@ else if ($_POST['page'] == 'PostingPage')
                 $comment = $_POST['comment'];
                 $username = $_SESSION['username'];
                 $insert = insertContent($username, $comment, $imgContent);//just inserting $username, $comment, $imgContent
-                //一つのアイディアとしてインサートとゲットコンテントを分ければあ
                 if($insert){ 
                     $status = 'success'; 
                     $statusMsg = "File uploaded successfully."; 
@@ -265,6 +266,8 @@ if ($_POST['page'] == 'SearchFriend')
         break;
     }
 }
+
+
 
 
 
