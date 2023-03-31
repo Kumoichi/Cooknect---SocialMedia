@@ -51,12 +51,12 @@
         });
         }
         var t = "<table>";
-        t += "<tr><th>Username</th><th>Delete</th></tr>";
+        t += "<tr><th>Username</th></tr>";
         for (var i = 0; i < rows.length; i++) {
         t += "<tr>";
         t += "<td>" + rows[i]['Username'] + "</td>";
         t += "<td>";
-        t += "<button type='button' data-username='" + rows[i]['Username'] + "'>Delete</button>";
+        t += "<button type='button' data-username='" + rows[i]['Username'] + "'>Check the page</button>";
         t += "</td>";
         t += "</tr>";
         }
