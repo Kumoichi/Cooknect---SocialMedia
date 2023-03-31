@@ -92,6 +92,11 @@ else if ($_POST['page'] == 'MainPage')
             include("mainpage.php");
             exit();
             break;
+
+        case 'PostImage':
+            include("posting.php");
+            exit();
+            break;
         
         default:
             echo "Unknown command from MainPage<br>";
@@ -124,6 +129,11 @@ else if ($_POST['page'] == 'NavPage')
             $result = getContent($_SESSION['username']);
                 $resultTwo = getRankedImage($_SESSION['username']);
                 include('mainpage.php');
+                exit();
+                break;
+
+        case 'NavSearch':
+                include('searchfriend.php');
                 exit();
                 break;
 
