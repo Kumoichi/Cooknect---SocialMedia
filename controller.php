@@ -30,6 +30,8 @@ if ($_POST['page'] == 'StartPage')
                 $_SESSION['username'] = $_POST['username'];
                 $result = getContent($_SESSION['username']);
                 $resultTwo = getRankedImage($_SESSION['username']);
+                $desc = getDescription($_SESSION['username']);
+                // $description = getDescription($_SESSION['username']);
                 include('mainpage.php');
             }
             exit();
@@ -89,6 +91,7 @@ else if ($_POST['page'] == 'MainPage')
             deletePost($id);
             $result = getContent($_SESSION['username']);
             $resultTwo = getRankedImage($_SESSION['username']);
+            $desc = getDescription($_SESSION['username']);
             include("mainpage.php");
             exit();
             break;
@@ -128,6 +131,7 @@ else if ($_POST['page'] == 'NavPage')
         case 'GoMain':
             $result = getContent($_SESSION['username']);
                 $resultTwo = getRankedImage($_SESSION['username']);
+                $desc = getDescription($_SESSION['username']);
                 include('mainpage.php');
                 exit();
                 break;
@@ -152,7 +156,7 @@ else if ($_POST['page'] == 'ProfilePage')
     switch($command) {
         case 'EditProfile':
             //username, email, description get updated. 
-            $data = edited_data($_SESSION['username'], $_POST['nameuser'],$_POST['emailuser'], $_POST['descriptionuser']);
+            $data = edited_data($_SESSION['username'], $_POST['nameuser'],$_POST['emailuser'],$_POST['passworduser'], $_POST['descriptionuser']);
             $result = user_data($_POST['nameuser']);//username, email, description are returned.
             $_SESSION['username'] = $_POST['nameuser'];
             $success = "Profile updated successfully";
@@ -229,6 +233,8 @@ else if ($_POST['page'] == 'PostingPage')
         $result = getContent($_SESSION['username']);
         //getting id, image, comment, 'like'. In order of number of 'like'.
         $resultTwo = getRankedImage($_SESSION['username']);
+        //getting description.
+        $desc = getDescription($_SESSION['username']);
 
         // unset the POST variables to prevent data from being resubmitted on refresh
         
@@ -266,6 +272,7 @@ if ($_POST['page'] == 'SearchFriend')
             $username = $_POST['username'];
             $result = getContent($username);
             $resultTwo = getRankedImage($username);
+            $desc = getDescription($username);
             include('friendpage.php');
             exit();
             break;
