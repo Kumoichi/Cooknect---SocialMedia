@@ -92,18 +92,10 @@
 
 
 
-
 <!-- display the user description-->
-  <div class="userdisplay" style="width:70%;">
-  <div class="h1"><?php $row = mysqli_fetch_assoc($desc); echo $row['Username'] ?></div>
-        <div class="h4" style="height:100px;"> 
-        <?php  $row = mysqli_fetch_assoc($desc); 
-            if ($row && $row['Description'] !== "") {
-                echo $row['Description'];
-            } else {
-                echo "This user has not added a description";
-            } ?></div>
-    </div>
+<div class="userdisplay" style="width:70%;">
+  <div class="h1"><?php if ($row = mysqli_fetch_assoc($desc)) echo $row['Username'] ?></div>
+  <div class="h4"><?php echo $row['Description'] ?></div>
 
     <!-- go to posting.php when you press + Post -->
     <div class="text-center" style="height:100%;width:70%; position:absolute; display:inline;">
@@ -137,7 +129,8 @@
                                         </form>
                                         <!-- calling likeComment function for increment like value when users press like button -->
                                         <button onclick="likeComment(<?php echo $row['id']; ?>)" class="btn btn-outline-success">Like</button>
-                                        <span style="display:block;" id="likes_<?php echo $row['id']; ?>" class="card-text"><?php echo $row['like']; ?></span>
+                                        <span style="display:block;" id="likes_<?php echo $row['id']; ?>" class="card-text"><?php 
+                                        if(!isset($row['like'])){ echo "0";} else echo $row['like']; ?></span>
                                     </div>
                                 </div>
                             <?php } ?>
