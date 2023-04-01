@@ -77,15 +77,20 @@ function insertContent($username, $comment, $imageContent) {
     global $conn;
     $sql = "SELECT * FROM images ORDER BY id DESC LIMIT 1";
     $result = mysqli_query($conn, $sql);
-    if (!$result) {
-        die("Error: " . mysqli_error($conn));
+
+    if ($result === false) {
+        die("Error executing query: " . mysqli_error($conn));
     }
-    $row = mysqli_fetch_assoc($result);
-    $lastComment = $row['comment'];
-    $lastImage = $row['image'];
-    if ($lastComment == $comment || $lastImage == $imageContent) {
-        return false;
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $lastComment = $row['comment'];
+        $lastImage = $row['image'];
+        if ($lastComment == $comment || $lastImage == $imageContent) {
+            return false;
+        }
     }
+
     $sql = "INSERT into images (username, comment, image, created) VALUES ('$username','$comment', '$imageContent', NOW())"; 
     if(mysqli_query($conn, $sql)) {
         return true;
@@ -168,15 +173,13 @@ function deleteUser($username)
     global $conn;
     $sql = "DELETE FROM images WHERE username = '$username'";
     mysqli_query($conn, $sql);
-    if (mysqli_affected_rows($conn) > 0) {
-        $sql = "DELETE FROM userstable WHERE Username = '$username'";
-        mysqli_query($conn, $sql);
-        if (mysqli_affected_rows($conn) > 0) {
-            return true;
-        }
+    $sql = "DELETE FROM userstable WHERE Username = '$username'";
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        return true;
+    } else {
+        return false;
     }
-    return false;
-    
 }
 
 function getFriend($searchTerm){
