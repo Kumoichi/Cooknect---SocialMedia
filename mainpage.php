@@ -80,8 +80,7 @@
         <?php while($row = mysqli_fetch_assoc($resultTwo)){ ?> 
             <div class="card mb-3">
                 <div style="height:400px">
-                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style="max-height: 100%; max-width: 100%;" />
-                    
+                    <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style="max-height: 100%; max-width: 100%;" /> 
                 </div>
                 <div class="card-body">
                     <p class="card-text"><?php echo $row['comment']; ?></p>
@@ -95,8 +94,15 @@
 
 
 <!-- display the user description-->
-  <div class="userdisplay" style="border:solid 1px black; width:70%;">
-        <div class="userinfo" style="border:solid 1px black; height:200px;"> This is where you wanna display user description</div>
+  <div class="userdisplay" style="width:70%;">
+  <div class="h1"><?php $row = mysqli_fetch_assoc($desc); echo $row['Username'] ?></div>
+        <div class="h4" style="height:100px;"> 
+        <?php  $row = mysqli_fetch_assoc($desc); 
+            if ($row && $row['Description'] !== "") {
+                echo $row['Description'];
+            } else {
+                echo "This user has not added a description";
+            } ?></div>
     </div>
 
     <!-- go to posting.php when you press + Post -->
