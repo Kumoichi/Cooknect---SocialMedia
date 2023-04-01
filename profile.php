@@ -25,7 +25,7 @@
 <div class="container">
     <div style="height:100%; width:800px">
     <form id='edit-profile-form' method='post' action='controller.php'>
-  <h4>Username:</h4>
+  <h4 style="margin-top: 20px;">Username:</h4>
   <input class ="p-3 mb-3 bg-light border border-1 shadow" style="width:400px" 
     type="text" name="nameuser" id="username">
 
@@ -52,10 +52,10 @@
       <input type='submit'>
   </form>
 
+  <div style="margin-bottom: 10px;">
   <button type="button" id="Editing" class="btn btn-outline-info">Edit Profile</button>
-  <button type="button" class="btn btn-outline-info">Log Out</button>
   <button type="button" id='Unsubscribe' class="btn btn-outline-info">Unsubscribe</button>
-
+  </div>
 </div>
 
 </body>
