@@ -208,7 +208,15 @@ else if ($_POST['page'] == 'PostingPage')
             $allowTypes = array('jpg','png','jpeg','gif'); 
             //checks whether extention is allowed type
             if(in_array($fileType, $allowTypes)){ 
-                $image = $_FILES['image']['tmp_name']; 
+                $image = $_FILES['image']['tmp_name'];
+                
+                // Check image size
+                $maxAllowedPacket = mysqli_fetch_assoc(mysqli_query($conn, "SHOW VARIABLES LIKE 'max_allowed_packet'"))['Value'];
+                $imgSize = filesize($image);
+                if ($imgSize > $maxAllowedPacket) {
+                    $statusMsg = "File size is too large. Max allowed packet size is " . $maxAllowedPacket . " bytes.";
+                    echo "<script>alert('$statusMsg');</script>";
+                } else {
                 //file_get_contents function is used to read the contents of the uploaded image file
                 // and store them in the $imgContent variable as a string.
                 //addslashes adds backslash in case file name include like quote characters, 
@@ -220,15 +228,21 @@ else if ($_POST['page'] == 'PostingPage')
                 if($insert){ 
                     $status = 'success'; 
                     $statusMsg = "File uploaded successfully."; 
+                    echo "<script>alert('$statusMsg');</script>";
                 }else{ 
                     $statusMsg = "File upload failed, please try again."; 
                 }  
+            }
             }else{ 
                 $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.'; 
+                echo "<script>alert('$statusMsg');</script>";
             } 
         }else{ 
             $statusMsg = 'Please select an image file to upload.'; 
+            echo "<script>alert('$statusMsg');</script>";
         } 
+       
+
 
         //getting id, image, comment, like.
         $result = getContent($_SESSION['username']);
@@ -284,11 +298,6 @@ if ($_POST['page'] == 'SearchFriend')
         break;
     }
 }
-
-
-
-
-
 
 //Wrong
 else {
