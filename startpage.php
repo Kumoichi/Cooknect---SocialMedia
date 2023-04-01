@@ -3,6 +3,12 @@
 <html>
 <head>
     <title>TRU CS Messenger</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
     <style>
         #layout-main {
             position:relative;
@@ -65,23 +71,31 @@
     </style>
 </head>
 
+
 <body style='margin:0'>
 
     <!-- Page Layout -->
     
-    <div id='layout-main'>
-        <!-- https://www.photo-ac.com/main/detail/25528664����摜�̃\�[�X�� -->
-        <img id='background-picture' src="image/washoku.jpg">
-        <div id='project-title'>
-            Cooknect
+    
+    <div id="layout-main">
+    <div class="bg-image" style="background-image: url('image/washoku.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+            <h1 class="text-black">Cooknect</h1>
+            <p class="text-black">Connect with other food enthusiasts and share your food pictures!</p>
+            <div class="d-grid gap-2 col-lg-6 mx-auto">
+                <button id="menu-login" class="btn btn-primary" type="button">Login</button>
+                <button id="menu-signup" class="btn btn-secondary" type="button">Sign Up</button>
+            </div>
+            </div>
         </div>
-                <div id='entry-modal'> Login or Sign up
-                <button id='menu-login' style='display:inline-block; width:100%; height:40px'>Lofgin</button>
-                <br>
-                <br>
-                <button id='menu-signup' style='display:inline-block; width:100%; height:40px'>Sign Up</button>
-                </div>     
+        </div>
     </div>
+    </div>
+
+
     
     <script>
         // Centers the content in the left and right divs on the page
@@ -102,7 +116,7 @@
     <!-- Modal Windows -->
     
     <div id='modal-login' class='modal-window'>
-        <h2 style='text-align:center'>Login to TRU Messenger</h2>
+        <h2 style='text-align:center'>Login to Cooknect</h2>
         <br>
         <form method='post' action='controller.php'>
             <input type='hidden' name='page' value='StartPage'>
@@ -120,7 +134,7 @@
         </form>
     </div>
     <div id='modal-signup' class='modal-window'>
-        <h2 style='text-align:center'>Sign up to TRU Messenger</h2>
+        <h2 style='text-align:center'>Sign up to Cooknect</h2>
         <br>
         <form method='post' action='controller.php'>
             <input type='hidden' name='page' value='StartPage'>
