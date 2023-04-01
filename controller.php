@@ -172,8 +172,9 @@ else if ($_POST['page'] == 'ProfilePage')
             {
                 $status = 'successfully unsubscribed';
             } else {
-                $status = 'failed';
+                $status = 'failed to unsubscribe';
             }
+            echo "<script>alert('$status');</script>";
             $display_modal_window = 'backtostart';
             include('startpage.php');
             exit();
