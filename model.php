@@ -46,7 +46,7 @@ function signup_a_new_user($username,$password,$email)
 //returning username, email, description.
 function user_data($username){
     global $conn;
-    $sql = "SELECT Username, Email, Description FROM userstable where Username = '$username'";
+    $sql = "SELECT Username, Email, Password, Description FROM userstable where Username = '$username'";
     $result = mysqli_query($conn, $sql);
     while($row = mysqli_fetch_assoc($result))
     {
@@ -56,11 +56,11 @@ function user_data($username){
 }
 
 //updating username, email, description.
-function edited_data($pusername, $username, $email, $description)
+function edited_data($pusername, $username, $email, $password, $description)
 {
     global $conn;
     $sql1 = "UPDATE userstable
-            SET Username = '$username', Email = '$email', Description = '$description' 
+            SET Username = '$username', Email = '$email', Password = '$password', Description = '$description' 
             WHERE Username = '$pusername'";
     $result1 = mysqli_query($conn, $sql1);
 
@@ -138,9 +138,20 @@ function updateLikes($commentId, $likes) {
 
 function getRankedImage($username){
     global $conn;
-    $sql = "SELECT id, image, comment, `like` FROM images WHERE username = '$username' ORDER BY `like` DESC"; 
+    $sql = "SELECT id, image, comment, `like` FROM images WHERE username = '$username' ORDER BY `like` DESC LIMIT 3"; 
     $result = mysqli_query($conn,$sql);
     return $result;
+}
+
+function getDescription($username){
+    global $conn;
+    $sql = "SELECT Username, Description FROM userstable WHERE Username = '$username'"; 
+    $result = mysqli_query($conn, $sql);
+    if($result) {
+         return $result;
+    } else {
+        return " ";
+    }
 }
 
 
