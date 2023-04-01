@@ -32,11 +32,16 @@
   <h4> Email </h4>
   <input class ="p-3 mb-3 bg-light border border-1 shadow" style="width:400px" 
     type="text" name="emailuser" id="email">
-  
-  <h4> Description </h4>
+
+  <h4> Password </h4>
+  <input class="p-3 mb-3 bg-light border border-1 shadow"
+    style="width: 60%; height: 100px; display:block;" name="passworduser" id="password">  
+ 
+    <h4> Description </h4>
   <input class="p-3 mb-3 bg-light border border-1 shadow"
     style="width: 60%; height: 100px; display:block;" name="descriptionuser" id="description">
   
+ 
   <input type='hidden' name='page' value='ProfilePage'>
   <input type='hidden' name='command' value='EditProfile'>
 </form>
@@ -76,10 +81,12 @@
       foreach ($result as $row) {
       $username = $row['Username'];
       $email = $row['Email'];
+      $password = $row['Password'];
       $description = $row['Description'];
       
       echo "document.getElementById('username').value = '$username';";
       echo "document.getElementById('email').value = '$email';";
+      echo "document.getElementById('password').value = '$password';";
       echo "document.getElementById('description').value = '$description';";
     }
   }
