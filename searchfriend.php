@@ -28,14 +28,27 @@
         <div class="col-md-6">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" id="searchBox" placeholder="Search by username...">
-                <button class="btn btn-primary" type="button" onclick="searchUsers()" id="searchButton">Search</button>
+                <button class="btn btn-secondary" type="button" onclick="searchUsers()" id="searchButton">Search</button>
             </div>
             <div id="searchResults"></div>
         </div>
     </div>
 </div>
 
-<div id="tr2-6-result-pane"></div>
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-secondary text-white">
+          Results
+        </div>
+        <div class="card-body" id="tr2-6-result-pane">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
@@ -44,37 +57,38 @@
     var searchText = $('#searchBox').val().toLowerCase().trim();
     var query = { page: "SearchFriend", command: "GetFriend", searchTerm: searchText };
     $.post(url, query, function(data) {
-        var rows = JSON.parse(data);
-        if (searchText != '') {
+    var rows = JSON.parse(data);
+    if (searchText != '') {
         rows = rows.filter(function(row) {
             return row['Username'].toLowerCase().indexOf(searchText) > -1;
         });
-        }
-        var t = "<table>";
-        t += "<tr><th>Username</th></tr>";
-        for (var i = 0; i < rows.length; i++) {
+    }
+    var t = "<table class='table table-striped'>";
+    t += "<thead><tr><th>Username</th></tr></thead>";
+    t += "<tbody>";
+    for (var i = 0; i < rows.length; i++) {
         t += "<tr>";
         t += "<td>" + rows[i]['Username'] + "</td>";
         t += "<td>";
-        t += "<button type='button' data-username='" + rows[i]['Username'] + "'>Check the page</button>";
+        t += "<button type='button' class='btn btn-secondary' data-username='" + rows[i]['Username'] + "'>Check the page</button>";
         t += "</td>";
         t += "</tr>";
-        }
-        t += "</table>";
-        document.getElementById("tr2-6-result-pane").innerHTML = t;
-        $('[data-username]').click(function() {
+    }
+    t += "</tbody></table>";
+    $("#tr2-6-result-pane").html(t);
+    $('[data-username]').click(function() {
         var username = $(this).data('username');
         // create and submit the form with the username value
         var form = $('<form action="controller.php" method="post">' +
-                        '<input type="hidden" name="username" value="' + username + '">' +
-                        '<input type="hidden" name="page" value="SearchFriend">' +
-                        '<input type="hidden" name="command" value="FriendPost">' +
-                    '</form>');
+            '<input type="hidden" name="username" value="' + username + '">' +
+            '<input type="hidden" name="page" value="SearchFriend">' +
+            '<input type="hidden" name="command" value="FriendPost">' +
+            '</form>');
         $('body').append(form);
         form.submit();
-        });
     });
-}
+});}
+
 
 </script>
 
