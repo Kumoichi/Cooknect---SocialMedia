@@ -95,7 +95,7 @@
 <!-- display the user description-->
 <div class="userdisplay" style="width:70%;">
   <div class="h1"><?php if ($row = mysqli_fetch_assoc($desc)) echo $row['Username'] ?></div>
-  <div class="h4"><?php echo $row['Description'] ?></div>
+  <div class="h4"><?php if(empty($row['Description'])){echo "This user has not put description";} else echo $row['Description'] ?></div>
 
     <!-- go to posting.php when you press + Post -->
     <div class="text-center" style="height:100%;width:70%; position:absolute; display:inline;">
